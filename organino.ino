@@ -5,6 +5,9 @@
 
 #include "timer.h"
 
+// Configuration
+#define ROTARY_SPEED_PIN 4
+#define ROTARY_SPEED_PULSE_MS 50
 
 // Global note and sustain status
 enum State : byte { Off, On, Holding };
@@ -12,14 +15,16 @@ State NOTES[127] = { State::Off };
 bool SUSTAIN_ACTIVE = false;
 
 // Timer for rotary pedal pulse
-Timer ROTARY_TIMER(50);
+Timer ROTARY_TIMER(ROTARY_SPEED_PULSE_MS);
 
 // Create and bind the MIDI interface to the default hardware Serial port
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 
 void setup() {
-    // LED indication
+    // Hardware setup
+    pinMode(ROTARY_SPEED_PIN, OUTPUT);
+    digitalWrite(ROTARY_SPEED_PIN, LOW);
     digitalWrite(LED_BUILTIN, LOW);
 
     // Set up MIDI interface on Serial port
@@ -38,7 +43,8 @@ void loop() {
 
     // Reset pedal pulse for the rotary speed
     if (ROTARY_TIMER.check()) {
-        digitalWrite(PIN_ROTARY_SPEED, LOW);
+        digitalWrite(ROTARY_SPEED_PIN, LOW);
+        ROTARY_TIMER.reset();
     }
 }
 
@@ -75,7 +81,7 @@ void onControlChange(const byte channel, const byte number, const byte value) {
 
 void onPortamentoPedal(const bool active) {
     if (active) {
-        digitalWrite(PIN_ROTARY_SPEED, HIGH);
+        digitalWrite(ROTARY_SPEED_PIN, HIGH);
         ROTARY_TIMER.restart();
     }
 }
