@@ -49,7 +49,9 @@ void onNoteOff(const byte channel, const byte note, const byte velocity) {
 }
 
 void onControlChange(const byte channel, const byte number, const byte value) {
-    if (number == midi::MidiControlChangeNumber::Sustain) {
+    // Note: Since the Sustain pedal cannot be divided to different  parts on
+    // our Clavinova, we're simply using Sustenuto as a workaround...
+    if (number == midi::MidiControlChangeNumber::Sostenuto) {
         onSustainPedal(channel, value >= 64);
     }
 }
