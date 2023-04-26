@@ -1,3 +1,5 @@
+// Copyright (c) 2023 Niklas Bettgen
+
 #include <MIDI.h>
 #include <midi_Defs.h>
 
@@ -14,6 +16,7 @@ Timer ROTARY_TIMER(50);
 
 // Create and bind the MIDI interface to the default hardware Serial port
 MIDI_CREATE_DEFAULT_INSTANCE();
+
 
 void setup() {
     // LED indication

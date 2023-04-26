@@ -1,7 +1,7 @@
 // Copyright (c) 2022 Niklas Bettgen
 
-#ifndef SRC_TIMER_H_
-#define SRC_TIMER_H_
+#ifndef TIMER_H_
+#define TIMER_H_
 
 #include "Arduino.h"
 
@@ -49,4 +49,4 @@ class Timer {
     ms          m_duration = InvalidDuration;   // Duration of the timer
 };
 
-#endif  // SRC_TIMER_H_
+#endif  // TIMER_H_
