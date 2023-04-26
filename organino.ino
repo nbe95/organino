@@ -31,6 +31,8 @@ void loop() {
 void onNoteOn(const byte channel, const byte note, const byte velocity) {
     if (NOTES[note & 0x7f] == State::Off) {
         MIDI.sendNoteOn(note, velocity, channel);
+    }
+    if (NOTES[note & 0x7f] != State::On) {
         NOTES[note & 0x7f] = State::On;
     }
 }
