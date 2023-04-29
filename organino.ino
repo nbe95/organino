@@ -6,7 +6,7 @@
 #include "timer.h"
 
 // Configuration
-#define ROTARY_SPEED_PIN 4
+#define ROTARY_SPEED_PIN 2
 #define ROTARY_SPEED_PULSE_MS 50
 
 // Global note and sustain status
