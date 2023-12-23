@@ -3,11 +3,13 @@
 #include <MIDI.h>
 #include <midi_Defs.h>
 
-#include "timer.h"
+#include "./src/timer.h"
+
 
 // Configuration
 #define ROTARY_SPEED_PIN 2
 #define ROTARY_SPEED_PULSE_MS 50
+
 
 // Global note and sustain status
 enum State : byte { Off, On, Holding };
@@ -79,18 +81,18 @@ void onControlChange(const byte channel, const byte number, const byte value) {
         onPortamentoPedal(value >= 64);
 }
 
-void onPortamentoPedal(const bool active) {
-    if (active) {
+void onPortamentoPedal(const bool is_active) {
+    if (is_active) {
         digitalWrite(ROTARY_SPEED_PIN, HIGH);
         ROTARY_TIMER.restart();
     }
 }
 
-void onSustainPedal(const byte channel, const bool active) {
-    SUSTAIN_ACTIVE = active;
-    digitalWrite(LED_BUILTIN, active ? HIGH : LOW);
+void onSustainPedal(const byte channel, const bool is_active) {
+    SUSTAIN_ACTIVE = is_active;
+    digitalWrite(LED_BUILTIN, is_active ? HIGH : LOW);
 
-    if (!active) {
+    if (!is_active) {
         for (byte note = 0; note < 127; note++) {
             if (NOTES[note & 0x7f] == State::Holding) {
                 MIDI.sendNoteOff(note, 0, channel);
