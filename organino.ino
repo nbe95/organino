@@ -6,6 +6,12 @@
 #include "./src/timer.h"
 
 
+// Git version fallback
+#ifndef GIT_VERSION
+#define GIT_VERSION __DATE__ " " __TIME__
+#endif
+
+
 // Configuration
 #define ROTARY_SPEED_PIN 2
 #define ROTARY_SPEED_PULSE_MS 50
@@ -32,6 +38,10 @@ void setup() {
     // Set up MIDI interface on Serial port
     MIDI.begin(MIDI_CHANNEL_OMNI);
     MIDI.setThruFilterMode(midi::Thru::Mode::Off);
+
+    // Send version string as SysEx message (vendor ID + arbitrary payload)
+    char version[] = "\x00Version: " GIT_VERSION;
+    MIDI.sendSysEx(sizeof(version), (byte*)version);
 
     // Register callbacks
     MIDI.setHandleNoteOn(onNoteOn);
