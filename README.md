@@ -30,8 +30,8 @@ directly connected to the expander and switches the speed.
 ### A note on versioning
 
 This sketch utilizes (of course!) [Semantic Versioning](https://semver.org/). A
-macro constant `GIT_VERSION` is expected to be defined and will be printed out
-at program start-up. As there is no generalized solution - *and that's a
+macro constant `GIT_VERSION` is expected to be defined and will be sent as SysEx
+message at program start-up. As there is no generalized solution - *and that's a
 shame!* - to fetch VCS version information at build time, providing this
 information depends on your own individual workflow. Check out
 [git-describe-arduino](https://github.com/fabianoriccardi/git-describe-arduino)
