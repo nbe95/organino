@@ -3,7 +3,7 @@
 #include <MIDI.h>
 #include <midi_Defs.h>
 
-#include "./lib/timer/src/timer.h"
+#include "src/lib/timer/src/timer.h"
 
 
 // Git version fallback
