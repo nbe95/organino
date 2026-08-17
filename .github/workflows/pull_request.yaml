@@ -15,9 +15,9 @@ jobs:
     name: Lint the c++ code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v7
       - name: Install cpplint
         run: pip install --upgrade cpplint
       - name: Run cpplint
@@ -27,8 +27,8 @@ jobs:
     name: Validate release label and notes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: jefflinse/pr-semver-bump@v1.6.0
+      - uses: actions/checkout@v7
+      - uses: jefflinse/pr-semver-bump@v1.7.4
         name: Bump and tag new version
         with:
           mode: validate
