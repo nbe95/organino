@@ -16,8 +16,8 @@ jobs:
     outputs:
       version: ${{ steps.semver.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: jefflinse/pr-semver-bump@v1.6.0
+      - uses: actions/checkout@v7
+      - uses: jefflinse/pr-semver-bump@v1.7.4
         name: Bump and tag new version
         id: semver
         with:
